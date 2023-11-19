@@ -1,17 +1,11 @@
 class Student:
-    name = ""
-    korean = 0
-    math = 0
-    english = 0
-
-    def set_scores(self, korean, math, english):
-        self.korean = korean
-        self.math = math
-        self.english = english
+    def __init__(self, name, korean, math, english):
+        self.name = name
+        self.scores = {'korean': korean, 'math': math, 'english': english}
 
     def get_average(self):
         # 국어, 수학, 영어 점수의 평균을 계산하여 반환
-        return (self.korean + self.math + self.english) / 3
+        return sum(self.scores.values()) / len(self.scores)
 
 # TODO 1: 학생 정보를 딕셔너리에 저장
 def loadData(file_path):
@@ -26,9 +20,7 @@ def loadData(file_path):
         korean, math, english = map(float, data[1:])
         
         # Student 클래스 인스턴스 생성
-        student = Student()
-        student.name = name
-        student.set_scores(korean, math, english)
+        student = Student(name, korean, math, english)
 
         # 딕셔너리에 학생 정보 저장
         student_data[name] = student
